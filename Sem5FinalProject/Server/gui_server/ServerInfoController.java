@@ -63,6 +63,8 @@ public class ServerInfoController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		serverIptxt.setText(EchoServer.getLocalIp());  // Set current ip
+		databasePasswordtxt.setText("Bv654gF11!");
+		serverPortxt.setText("5555");
 		LoadTable();
 	}
 	
