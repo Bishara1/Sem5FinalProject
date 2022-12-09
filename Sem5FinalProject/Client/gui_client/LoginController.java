@@ -19,6 +19,7 @@ public class LoginController {
 	@FXML
 	private TextField hostIptxt;
 
+	// 
 	public void start(Stage primaryStage) throws Exception {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/gui_client/Login.fxml"));
