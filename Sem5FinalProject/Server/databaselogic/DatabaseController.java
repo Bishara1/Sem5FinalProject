@@ -27,7 +27,7 @@ public class DatabaseController {
 			  /* handle the error*/
 			  System.out.println("Driver definition failed");
 	      }
-	      
+		  
 	      try {
 	          conn = DriverManager.getConnection("jdbc:mysql://localhost/prototype?serverTimezone=IST", "root", dbPassword);
 	          System.out.println("SQL connection succeeded");
@@ -68,7 +68,6 @@ public class DatabaseController {
 			} catch (SQLException e) { e.printStackTrace(); }
 		}
 	  
-	  
 	  public ArrayList<Subscriber> ReadFromDB() throws SQLException {
 			Statement stmt;
 			Subscriber tempSub = new Subscriber(null, null, null, null, null, null, null);
@@ -99,9 +98,9 @@ public class DatabaseController {
 			} catch (SQLException e) { e.printStackTrace(); }
 			
 			return alldatabase;
-		}
+	   }
 	  
-	  public static synchronized DatabaseController GetFunctionsInstance(String databasePassword) {
-		  return ( DBFunctionsInstance == null ) ? new DatabaseController(databasePassword) : DBFunctionsInstance;
-	  }
+	   public static synchronized DatabaseController GetFunctionsInstance(String databasePassword) {
+		   return ( DBFunctionsInstance == null ) ? new DatabaseController(databasePassword) : DBFunctionsInstance;
+	   }
 }

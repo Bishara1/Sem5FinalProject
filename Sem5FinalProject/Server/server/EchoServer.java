@@ -25,7 +25,7 @@ import ocsf.server.*;
  * @version July 2000
  */
 public class EchoServer extends AbstractServer { 
-	DatabaseController dbController;
+	private DatabaseController dbController;
 	public static ArrayList<Connected> users = new ArrayList<Connected>();
 	private static String databasePassword = null;
   //Class variables *************************************************
@@ -68,8 +68,7 @@ public class EchoServer extends AbstractServer {
 		//catch (SQLException e) {e.printStackTrace();} 
 		catch (IOException e) {
 			e.printStackTrace();
-		}
-			   
+		}	   
   }
   
   public static String getLocalIp() {
@@ -96,10 +95,16 @@ public class EchoServer extends AbstractServer {
    * This method overrides the one in the superclass.  Called
    * when the server stops listening for connections.
    */
-  protected void serverStopped()
-  {
-    System.out.println("Server has stopped listening for connections.");
+  protected void serverStopped() {
+	  System.out.println("Server has stopped listening for connections.");
   }
+  
+  @Override
+  protected void clientConnected(ConnectionToClient client) {
+	  
+  }
+  
+
   
   //Class methods ***************************************************
   
@@ -110,25 +115,21 @@ public class EchoServer extends AbstractServer {
    * @param args[0] The port number to listen on.  Defaults to 5555 
    *          if no argument is entered.
    */
-  public static void runServer(String[] args) 
-  {
+  public static void runServer(String[] args) {
     int port = 0; //Port to listen on
     databasePassword = args[1];
 
-    try
-    {
+    try {
       port = Integer.parseInt(args[0]); 
       
     }
-    catch(Throwable t)
-    {
+    catch(Throwable t) {
       port = DEFAULT_PORT; //Set port to 5555
     }
 	
     EchoServer sv = new EchoServer(port);
     
-    try 
-    {
+    try {
       sv.listen(); //Start listening for connections
     } 
     catch (Exception ex) 
