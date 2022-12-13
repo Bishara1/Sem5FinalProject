@@ -13,6 +13,8 @@ import server.EchoServer;
 import client.ChatClient;
 import client.ClientController;
 import client.ClientUI;
+import common.Command;
+import common.Message;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -34,6 +36,7 @@ public class SubscribersViewerController implements Initializable{
 	ChatClient client;
 	
 	private ObservableList<Subscriber> obs;
+	Message messageToServer = new Message(null, null);
 
 	@FXML
 	private TableView<Subscriber> tableSub;
@@ -78,9 +81,11 @@ public class SubscribersViewerController implements Initializable{
 	}
 	
 	public void UpdatBtn() {
-		String command = "Update " + SubscriberIDtxt.getText() + " " + SubscriberCreditNumtxt.getText() + " " + SubscriberSubNumtxt.getText();
+		String details = SubscriberIDtxt.getText() + " " + SubscriberCreditNumtxt.getText() + " " + SubscriberSubNumtxt.getText();
+		messageToServer.setCommand(Command.DatabaseUpdate);
+		messageToServer.setContent(details);
 		System.out.println("Updating");
-		ClientUI.chat.accept(command);
+		ClientUI.chat.accept(messageToServer);
 		ClientUI.chat.display("Updated");
 		RefreshTable();	
 	}
@@ -98,13 +103,17 @@ public class SubscribersViewerController implements Initializable{
 	}
 	
 	public void RefreshTable() {
-		ClientUI.chat.accept("Read");  // read from database
+		messageToServer.setCommand(Command.DatabaseRead);
+		messageToServer.setContent(null);
+		ClientUI.chat.accept(messageToServer);  // read from database
 		obs = FXCollections.observableArrayList(ChatClient.subscribers);  // insert database details to obs
 		LoadAndSetTable(); // load database colummns into table and display them
 	}
 	
 	public void ExitBtn() {
-		ClientUI.chat.accept("Disconnect");
+		messageToServer.setCommand(Command.Disconnect);
+		messageToServer.setContent(null);
+		ClientUI.chat.accept(messageToServer);
 		System.out.println("exiting login screen");
 		System.exit(0);	
 	}

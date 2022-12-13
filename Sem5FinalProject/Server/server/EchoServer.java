@@ -101,7 +101,9 @@ public class EchoServer extends AbstractServer {
   
   @Override
   protected void clientConnected(ConnectionToClient client) {
-	  
+//	  ArrayList<String> info = new ArrayList<>();
+//	  info.add(client.getInetAddress().toString());
+  	
   }
   
 
