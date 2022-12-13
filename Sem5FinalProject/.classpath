@@ -3,6 +3,7 @@
 	<classpathentry kind="src" path="Client"/>
 	<classpathentry kind="src" path="Server"/>
 	<classpathentry kind="src" path="OCSF"/>
+	<classpathentry kind="src" path="Common"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>

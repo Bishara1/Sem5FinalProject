@@ -85,8 +85,7 @@ public class EchoServer extends AbstractServer {
    * This method overrides the one in the superclass.  Called
    * when the server starts listening for connections.
    */
-  protected void serverStarted()
-  {
+  protected void serverStarted() {
 	  dbController = DatabaseController.GetFunctionsInstance(databasePassword);
 	  System.out.println("Server listening for connections on port " + getPort());
   }
