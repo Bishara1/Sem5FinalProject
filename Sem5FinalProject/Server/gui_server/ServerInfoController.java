@@ -8,6 +8,7 @@ import javax.naming.spi.InitialContextFactory;
 
 import client.ClientUI;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,9 +64,16 @@ public class ServerInfoController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		serverIptxt.setText(EchoServer.getLocalIp());  // Set current ip
-		databasePasswordtxt.setText("Bv654gF11!");
-		serverPortxt.setText("5555");
 		LoadTable();
+		data.addListener(new ListChangeListener<Connected>() {
+
+			@Override
+			public void onChanged(Change<? extends Connected> c) {
+				// TODO Auto-generated method stub
+				initialize(null, null);
+			}
+			
+		});
 	}
 	
 	public void RunServerBtn() {

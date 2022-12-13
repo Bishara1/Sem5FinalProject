@@ -54,6 +54,6 @@ public class LoginController {
 	
 	public void ConnectNewClient() {
 		ClientUI.chat = new ClientController(hostIptxt.getText(), 5555);  // new client connected
-		ClientUI.chat.accept("login"); // send to server that a client is connected
+		///ClientUI.chat.accept("login"); // send to server that a client is connected
 	}
 }
