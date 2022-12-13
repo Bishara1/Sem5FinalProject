@@ -1,7 +1,7 @@
 package common;
 
-public enum Commands {
-	Connection,
+public enum Command {
+	Connect,
 	Disconnect,
 	DatabaseUpdate,
 	DatabaseRead,

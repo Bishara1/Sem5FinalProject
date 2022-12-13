@@ -49,6 +49,14 @@ public class ClientController implements ChatIF
     try 
     {
     	client = new ChatClient(host, port, this);
+    	
+    	ArrayList<String> info = new ArrayList<>();
+    	info.add(client.getHost());
+    	info.add(client.getInetAddress().toString());
+    	
+    	Message clientInfo = new Message(info, Command.Connect);
+    	
+    	ClientUI.chat.accept(clientInfo);
     } 
     catch(IOException exception) 
     {
@@ -57,14 +65,13 @@ public class ClientController implements ChatIF
     }
   }
 
-  
   //Instance methods ************************************************
   
   /**
    * This method waits for input from the console.  Once it is 
    * received, it sends it to the client's message handler.
    */
-  public void accept(String data) {
+  public void accept(Object data) {
       client.handleMessageFromClientUI(data);
     
   }
