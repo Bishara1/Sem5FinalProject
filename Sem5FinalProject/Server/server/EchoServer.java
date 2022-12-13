@@ -60,12 +60,11 @@ public class EchoServer extends AbstractServer {
   
   public void handleMessageFromClient(Object msg, ConnectionToClient client)
   {
-	  	String data = (String) msg;
+	  	Message data = (Message) msg;
 	  
 		System.out.println("Message received: " + msg + " from " + client);
 		try {
-			String[] temp = client.toString().split(" ");
-			ParseClientData(data, client, temp[1]);
+			ParseClientData(data, client);
 		} 
 		//catch (SQLException e) {e.printStackTrace();} 
 		catch (IOException e) {
@@ -140,7 +139,13 @@ public class EchoServer extends AbstractServer {
   }
   
   
-  public void ParseClientData(Message data, ConnectionToClient client, String ip) throws IOException {
+  /**
+   * @param data
+   * @param client
+   * @param ip
+   * @throws IOException
+   */
+  public void ParseClientData(Message data, ConnectionToClient client) throws IOException {
 	  Message response = new Message(null, null);
 	  
 	  try {
@@ -168,7 +173,7 @@ public class EchoServer extends AbstractServer {
 				  ArrayList<Subscriber> temp = new ArrayList<Subscriber>();
 				  
 				  for (Connected Client : users) {
-					  if (Client.getIp().equals(ip)) {
+					  if (Client.getIp().equals(client.toString().split(" ")[1])) {
 						  users.get(users.indexOf(Client)).setStatus("Connected");
 						  found = true;
 						  break;
@@ -178,7 +183,7 @@ public class EchoServer extends AbstractServer {
 	
 			  case Disconnect:
 				  for (Connected Client : users) {
-					  if (Client.getIp().equals(ip)) {
+					  if (Client.getIp().equals(client.toString().split(" ")[1])) {
 						  users.get(users.indexOf(Client)).setStatus("Disconnected");
 						  break;
 					  }
