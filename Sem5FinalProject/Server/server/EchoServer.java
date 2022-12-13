@@ -154,7 +154,7 @@ public class EchoServer extends AbstractServer {
       
       try 
       {
-          conn = DriverManager.getConnection("jdbc:mysql://localhost/prototype?serverTimezone=IST", "root", databasePassword);
+          conn = DriverManager.getConnection("jdbc:mysql://localhost/ekrut?serverTimezone=IST", "root", databasePassword);
           System.out.println("SQL connection succeed");
    	  } catch (SQLException ex)  { /* handle any errors*/
 			System.out.println("SQLException: " + ex.getMessage());
