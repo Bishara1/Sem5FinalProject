@@ -54,6 +54,10 @@ public class SubscribersViewerController implements Initializable{
 	private TableColumn<Subscriber,String> visacol;
 	@FXML
 	private TableColumn<Subscriber,String> subnumcol;
+	@FXML
+	private TableColumn<Subscriber,String> usercol;
+	@FXML
+	private TableColumn<Subscriber,String> passwordcol;
 	
 	@FXML
 	private TextField SubscriberIDtxt;
