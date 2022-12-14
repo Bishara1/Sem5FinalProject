@@ -42,7 +42,9 @@ public class LoginController {
 	
 	public void LoginBtn(ActionEvent event) throws Exception {
 		ConnectNewClient();
-
+		Message msg = new Message(null, Command.DatabaseRead);
+		ClientUI.chat.accept(msg);
+		
 		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		Stage primaryStage = new Stage();
 		
@@ -57,6 +59,7 @@ public class LoginController {
 	}
 	
 	public void ConnectNewClient() {
+		// the server ip is hardcoded
 		ClientUI.chat = new ClientController(hostIptxt.getText(), 5555);  // new client connected
 		///ClientUI.chat.accept("login"); // send to server that a client is connected
 	}

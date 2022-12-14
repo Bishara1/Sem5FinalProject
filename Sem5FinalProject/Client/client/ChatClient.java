@@ -6,8 +6,8 @@ package client;
 
 import ocsf.client.*;
 import common.*;
-import gui_client.SubscribersViewerController;
 import logic.Subscriber;
+
 
 import java.io.*;
 import java.util.ArrayList;
@@ -103,14 +103,14 @@ public class ChatClient extends AbstractClient
   {
     try
     {
-    	Message msg = (Message) message;
+//    	Message msg = (Message) message;
 //    	
 //    	if(msg.equals("login")) 
 //    		msg += " " + this.getHost();
     	
     	openConnection(); //in order to send more than one message
-       	awaitResponse = true;
-    	sendToServer(msg);
+    	awaitResponse = true; 
+    	sendToServer(message);
     	
     	while (awaitResponse) {
 			try {

@@ -24,4 +24,9 @@ public class Message {
 	public void setCommand(Command command) {
 		this.command = command;
 	}
+	
+	@Override
+	public String toString() {
+		return "Message of type: " + command;
+	}
 }

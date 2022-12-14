@@ -65,7 +65,6 @@ public class ClientController implements ChatIF
    */
   public void accept(Object data) {
       client.handleMessageFromClientUI(data);
-    
   }
 
   /**
@@ -74,16 +73,8 @@ public class ClientController implements ChatIF
    *
    * @param message The string to be displayed.
    */
-  public void display(String message) 
-  {
+  public void display(String message) {
 	  System.out.println("> " + message);
-  }
-  
-  //Custom methods ************************************************
-  
-  
-  public void acceptMessage(Object content, Command command) {
-	  
   }
 }
 

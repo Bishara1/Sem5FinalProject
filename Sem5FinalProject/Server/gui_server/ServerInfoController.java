@@ -1,14 +1,10 @@
 package gui_server;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.naming.spi.InitialContextFactory;
 
-import client.ClientUI;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,10 +17,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import logic.Connected;
 import server.EchoServer;
-import server.ServerUI;
 
 public class ServerInfoController implements Initializable {
 	
@@ -112,5 +106,4 @@ public class ServerInfoController implements Initializable {
 	public void QuitBtn() {
 		System.exit(0);
 	}
-	
 }
