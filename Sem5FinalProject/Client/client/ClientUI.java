@@ -12,7 +12,7 @@ public class ClientUI extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-//		chat = new ClientController("localhost", 5555); 
+		//chat = new ClientController("localhost", 5555); 
 						  		
 		LoginController loginFrame = new LoginController(); // create StudentFrame
 		loginFrame.start(primaryStage);
