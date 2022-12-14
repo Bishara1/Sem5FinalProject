@@ -1,8 +1,6 @@
 package gui_client;
 
 
-import client.ChatClient;
-import client.ClientUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +13,8 @@ import javafx.stage.Stage;
 public class LoginEkrutController {
 	@FXML
 	private Button emaillogin;
-
-
 	
-	
-	
-	public void emailloginBtn(ActionEvent event) throws Exception { {
+	public void emailloginBtn(ActionEvent event) throws Exception { 
 		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		Stage primaryStage = new Stage();
 		
@@ -33,5 +27,8 @@ public class LoginEkrutController {
 		
 		primaryStage.show();	
 	}
+	
+	public void EmailLoginBtn() {
+		
 	}
 }

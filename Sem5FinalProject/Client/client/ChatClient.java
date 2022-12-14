@@ -101,31 +101,31 @@ public class ChatClient extends AbstractClient
    */
   public void handleMessageFromClientUI(Object message)  
   {
-    try
-    {
+	  try
+	  {
 //    	Message msg = (Message) message;
 //    	
 //    	if(msg.equals("login")) 
 //    		msg += " " + this.getHost();
+
+		  openConnection(); //in order to send more than one message
+    	  awaitResponse = true; 
+    	  sendToServer(message);
     	
-    	openConnection(); //in order to send more than one message
-    	awaitResponse = true; 
-    	sendToServer(message);
-    	
-    	while (awaitResponse) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+    	  while (awaitResponse) {
+			  try {
+				  Thread.sleep(100);
+			  }   catch (InterruptedException e) {
+				  e.printStackTrace();
+			  }
+		  }
+      }
+      catch(IOException e)
+      {
+          clientUI.display("Could not send message to server.  Terminating client.");
+          quit();
+      }
     }
-    catch(IOException e)
-    {
-      clientUI.display("Could not send message to server.  Terminating client.");
-      quit();
-    }
-  }
   
   
   

@@ -29,7 +29,7 @@ public class LoginSubscriberController {
 	
 	
 	
-	public void loginBtn(ActionEvent event) throws Exception { {
+	public void loginBtn(ActionEvent event) throws Exception {
 		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		Stage primaryStage = new Stage();
 		
@@ -43,5 +43,4 @@ public class LoginSubscriberController {
 		
 		primaryStage.show();	
 	}
-}
 }
