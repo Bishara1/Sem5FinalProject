@@ -7,10 +7,11 @@ import javafx.collections.ObservableList;
 
 public class Subscriber implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
-	private String Fname, LName, id, PhoneNum, Email, Visa, SubNum;
 
-	public Subscriber(String fname, String lName, String Id, String phoneNum, String email, String visa, String subNum) {
+	private static final long serialVersionUID = 1L;
+	private String Fname, LName, id, PhoneNum, Email, Visa, SubNum,UserName,Password;
+
+	public Subscriber(String fname, String lName, String Id, String phoneNum, String email, String visa, String subNum,String username,String password) {
 		super();
 		Fname = fname;
 		LName = lName;
@@ -19,6 +20,8 @@ public class Subscriber implements Serializable {
 		Email = email;
 		Visa = visa;
 		SubNum = subNum;
+		UserName = username;
+		Password = password;
 	}
 
 	public String getId() {
@@ -76,9 +79,24 @@ public class Subscriber implements Serializable {
 	public void setSubNum(String subNum) {
 		SubNum = subNum;
 	}
+	public String getUserName() {
+		return UserName;
+	}
+
+	public void setUserName(String userName) {
+		UserName = userName;
+	}
+
+	public String getPassword() {
+		return Password;
+	}
+
+	public void setPassword(String password) {
+		Password = password;
+	}
 	
 	@Override
 	public String toString() {
-		return this.Fname + " " + this.LName + " " + this.id + " " + this.Email + " " + this.PhoneNum + " " + this.Visa + " " + this.SubNum;
+		return this.Fname + " " + this.LName + " " + this.id + " " + this.Email + " " + this.PhoneNum + " " + this.Visa + " " + this.SubNum +" "+ this.UserName+" "+ this.Password;
 	}
 }

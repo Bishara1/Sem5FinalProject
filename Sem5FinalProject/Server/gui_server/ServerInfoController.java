@@ -65,6 +65,7 @@ public class ServerInfoController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		serverIptxt.setText(EchoServer.getLocalIp());  // Set current ip
 		LoadTable();
+
 		/*
 		 * data.addListener(new ListChangeListener<Connected>() {
 		 * 
@@ -73,6 +74,17 @@ public class ServerInfoController implements Initializable {
 		 * 
 		 * });
 		 */	}
+
+//		data.addListener(new ListChangeListener<Connected>() {
+//
+//			@Override
+//			public void onChanged(Change<? extends Connected> c) {
+//				// TODO Auto-generated method stub
+//				initialize(null, null);
+//			}
+//			
+//		});
+	
 	
 	public void RunServerBtn() {
 		if (serverPortxt.getText().equals("")) {

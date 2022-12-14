@@ -13,6 +13,8 @@ import logic.Connected;
 import logic.Subscriber;
 import databaselogic.DatabaseController;
 import ocsf.server.*;
+import common.Command;
+import common.Message;
 
 /**
  * This class overrides some of the methods in the abstract 
@@ -58,12 +60,11 @@ public class EchoServer extends AbstractServer {
   
   public void handleMessageFromClient(Object msg, ConnectionToClient client)
   {
-	  	String data = (String) msg;
+	  	Message data = (Message) msg;
 	  
 		System.out.println("Message received: " + msg + " from " + client);
 		try {
-			String[] temp = client.toString().split(" ");
-			ParseClientData(data, client, temp[1]);
+			ParseClientData(data, client);
 		} 
 		//catch (SQLException e) {e.printStackTrace();} 
 		catch (IOException e) {
@@ -100,7 +101,9 @@ public class EchoServer extends AbstractServer {
   
   @Override
   protected void clientConnected(ConnectionToClient client) {
-	  
+//	  ArrayList<String> info = new ArrayList<>();
+//	  info.add(client.getInetAddress().toString());
+  	
   }
   
 
@@ -138,55 +141,61 @@ public class EchoServer extends AbstractServer {
   }
   
   
-  public void ParseClientData(String data, ConnectionToClient client, String ip) throws IOException {
-	  String[] parsedData = data.split(" ");
-	  ArrayList<Subscriber> response = new ArrayList<>();
+  /**
+   * @param data
+   * @param client
+   * @param ip
+   * @throws IOException
+   */
+  public void ParseClientData(Message data, ConnectionToClient client) throws IOException {
+	  Message response = new Message(null, null);
 	  
 	  try {
-		  if (parsedData[0].equals("Update")) {
-			  dbController.UpdateToDB(parsedData);
-			  response.add(new Subscriber("Update", null, null, null, null, null, null));
-			  client.sendToClient(response);
-		  }
-		  
-		  else if (parsedData[0].equals("Read"))
-		  {
-			  response.add(new Subscriber("Database", null, null, null, null, null, null));
-			  response.addAll(dbController.ReadFromDB());
-			  client.sendToClient(response);
-		  }
-		  
-		  else if (parsedData[0].equals("login"))
-		  {
-			 boolean found = false;
-			 ArrayList<Subscriber> temp = new ArrayList<Subscriber>();
-			 
-			 for (Connected Client : users) {
-					if (Client.getIp().equals(ip)) {
-						users.get(users.indexOf(Client)).setStatus("Connected");
-						found = true;
-						break;
-					}
-			 }
-			 if (!found)
-				 users.add(new Connected(ip, parsedData[1], "Connected"));
-			 
-			 temp.add(new Subscriber("login", null, null, null, null, null, null));
-			 client.sendToClient(temp);
-		  }
-		  
-		  else if (parsedData[0].equals("Disconnect")) {
-			  for (Connected Client : users) {
-				if (Client.getIp().equals(ip)) {
-					users.get(users.indexOf(Client)).setStatus("Disconnected");
-					break;
-				}
-			  }
-			  
-			  response.add(new Subscriber("Disconnected", null, null, null, null, null, null));
-			  client.sendToClient(response);
-		  }
-		  
+		  switch(data.getCommand()) {
+			  case DatabaseUpdate:
+				  String[] detailsToDB = ((String)data.getContent()).split(" "); // get content
+				  dbController.UpdateToDB(detailsToDB);
+				  
+				  response.setCommand(Command.DatabaseUpdate);
+				  client.sendToClient(response);
+				  break;
+	
+			  case DatabaseRead:
+				  response.setCommand(Command.DatabaseRead);
+				  
+				  ArrayList<Subscriber> allDatabase = new ArrayList<Subscriber>();
+				  allDatabase.addAll(dbController.ReadFromDB());
+				  response.setContent(allDatabase);
+				  
+				  client.sendToClient(response);
+				  break;
+	
+			  case Connect:
+				  boolean found = false;
+				  ArrayList<Subscriber> temp = new ArrayList<Subscriber>();
+				  
+				  for (Connected Client : users) {
+					  if (Client.getIp().equals(client.toString().split(" ")[1])) {
+						  users.get(users.indexOf(Client)).setStatus("Connected");
+						  found = true;
+						  break;
+					  }
+			  	  }
+			  	  break;
+	
+			  case Disconnect:
+				  for (Connected Client : users) {
+					  if (Client.getIp().equals(client.toString().split(" ")[1])) {
+						  users.get(users.indexOf(Client)).setStatus("Disconnected");
+						  break;
+					  }
+				  }
+			  	  response.setCommand(Command.Disconnect);
+			  	  client.sendToClient(response);
+			  	  break;
+			 default:
+				 break;  // add functionality
+		 }  
 	  } catch(SQLException e) {e.printStackTrace();}
   }
 }

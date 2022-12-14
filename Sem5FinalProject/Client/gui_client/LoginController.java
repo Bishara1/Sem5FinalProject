@@ -1,8 +1,12 @@
 package gui_client;
 
+import java.util.ArrayList;
+
 import client.ChatClient;
 import client.ClientController;
 import client.ClientUI;
+import common.Command;
+import common.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

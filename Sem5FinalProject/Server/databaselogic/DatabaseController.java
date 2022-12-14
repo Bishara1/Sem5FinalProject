@@ -19,18 +19,19 @@ public class DatabaseController {
 		  ConnectToDB(dbpassword);
 	  }
 	
-	  public void ConnectToDB(String dbPassword) {
+	  public void ConnectToDB(String databasePassword) {
 		  try {
 		      Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-		      System.out.println("Driver definition succeeded");
+		      System.out.println("Driver definition succeed");
 		  } catch (Exception ex) {
 			  /* handle the error*/
 			  System.out.println("Driver definition failed");
 	      }
-		  
-	      try {
-	          conn = DriverManager.getConnection("jdbc:mysql://localhost/prototype?serverTimezone=IST", "root", dbPassword);
-	          System.out.println("SQL connection succeeded");
+	      
+	      try 
+	      {
+	          conn = DriverManager.getConnection("jdbc:mysql://localhost/ekrut?serverTimezone=IST", "root", databasePassword);
+	          System.out.println("SQL connection succeed");
 	   	  } catch (SQLException ex)  { /* handle any errors*/
 				System.out.println("SQLException: " + ex.getMessage());
 				System.out.println("SQLState: " + ex.getSQLState());
@@ -38,15 +39,17 @@ public class DatabaseController {
 	   	  }
 	  }
 	  
-	  @SuppressWarnings("unchecked")
+	
+	 
 	  public void SaveToDB(Object message) throws SQLException {
 			PreparedStatement ps = conn.prepareStatement("INSERT INTO subscriber "
 					+ "(first_name, last_name, id, phone_number, email_address,"
-					+ " credit_card_number, subscriber_number) VALUES (?, ?, ?, ?, ?, ?, ?)");
+					+ " credit_card_number, subscriber_number,user_name,password) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)");
 			ArrayList<String> data = (ArrayList<String>) message;
 			
-			try {
-				for (int i = 1; i < 8; i++)
+			try 
+			{
+				for (int i = 1; i < 10; i++)
 					ps.setString(i, data.get(i-1));
 				
 				ps.executeQuery();
@@ -70,7 +73,7 @@ public class DatabaseController {
 	  
 	  public ArrayList<Subscriber> ReadFromDB() throws SQLException {
 			Statement stmt;
-			Subscriber tempSub = new Subscriber(null, null, null, null, null, null, null);
+			Subscriber tempSub = new Subscriber(null, null, null, null, null, null, null,null,null);
 			ArrayList<Subscriber> alldatabase = new ArrayList<>();
 			try 
 			{
@@ -86,12 +89,15 @@ public class DatabaseController {
 		 			tempSub.setEmail(rs.getString(5));
 		 			tempSub.setVisa(rs.getString(6));
 		 			tempSub.setSubNum(rs.getString(7));
+		 			tempSub.setUserName(rs.getString(8));
+		 			tempSub.setPassword(rs.getString(9));
 		 			
 		 			//add it to the database arraylist
 		 			alldatabase.add(tempSub);
 		 			
 		 			// create new object
-		 			tempSub = new Subscriber(null, null, null, null, null, null, null);
+		 			tempSub = new Subscriber(null, null, null, null, null, null, null,null,null);
+
 				}
 		 		
 				rs.close();

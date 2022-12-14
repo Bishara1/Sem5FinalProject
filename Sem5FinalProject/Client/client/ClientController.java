@@ -57,14 +57,13 @@ public class ClientController implements ChatIF
     }
   }
 
-  
   //Instance methods ************************************************
   
   /**
    * This method waits for input from the console.  Once it is 
    * received, it sends it to the client's message handler.
    */
-  public void accept(String data) {
+  public void accept(Object data) {
       client.handleMessageFromClientUI(data);
     
   }
@@ -79,5 +78,13 @@ public class ClientController implements ChatIF
   {
 	  System.out.println("> " + message);
   }
+  
+  //Custom methods ************************************************
+  
+  
+  public void acceptMessage(Object content, Command command) {
+	  
+  }
 }
+
 //End of ConsoleChat class
