@@ -57,15 +57,15 @@ public class DatabaseController {
 		}
 	 
 	  public void UpdateToDB(String[] details) throws SQLException {
-		  // data = {command id credit_card subscriber_num}
+		    // data format = { id credit_card subscriber_num}
 			PreparedStatement ps = conn.prepareStatement("UPDATE subscriber "
 					+ "Set credit_card_number = ?, subscriber_number = ? "
 					+ "Where id = ?");
 			
 			try {
-				ps.setString(1, details[2]);  // credit_card
-				ps.setString(2, details[3]);  // subscriber_number
-				ps.setString(3, details[1]);  // id
+				ps.setString(1, details[1]);  // credit_card
+				ps.setString(2, details[2]);  // subscriber_number
+				ps.setString(3, details[0]);  // id
 				
 				ps.executeUpdate();
 			} catch (SQLException e) { e.printStackTrace(); }
