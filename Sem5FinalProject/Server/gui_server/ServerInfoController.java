@@ -58,6 +58,8 @@ public class ServerInfoController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		serverIptxt.setText(EchoServer.getLocalIp());  // Set current ip
+		serverPortxt.setText("5555");
+		databasePasswordtxt.setText("Bv654gF11!");
 		LoadTable();
 
 		/*
@@ -81,6 +83,7 @@ public class ServerInfoController implements Initializable {
 	
 	
 	public void RunServerBtn() {
+		// on click, change button color to #373057
 		if (serverPortxt.getText().equals("")) {
 			System.out.println("Please Enter Port");
 			return;
